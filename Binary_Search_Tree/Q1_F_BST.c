@@ -92,11 +92,35 @@ int main()
 //////////////////////////////////////////////////////////////////////////////////
 
 void levelOrderTraversal(BSTNode* root)
-{
+{	
+	printf("\n%d\n",root->item);
+	Queue* q=malloc(sizeof(Queue)); 						//큐 만들고 초기화
+	q->head=NULL;
+	q->tail=NULL;  
 
-    /* add your code here */
+	enqueue(&(q->head),&(q->tail),root);
+
+	while(1){
+		// printf("반복했냐고?\t");
+		if((q->head)==NULL || (q->tail)==NULL){
+			break;
+		}
+		BSTNode* dequeued = dequeue(&(q->head),&(q->tail));
+		// printf("%p\t",dequeued);
+		if(dequeued == NULL){ 								//종료조건 설정
+			break;
+		}
+		printf(" %d ",dequeued->item);
+
+		if(dequeued->left != NULL ){
+			enqueue(&(q->head),&(q->tail),dequeued->left);
+		}
+		if(dequeued->right != NULL ){
+			enqueue(&(q->head),&(q->tail),dequeued->right);
+		}
+	}
 }
-
+//  1 20 1 15 1 50 1 10 1 18 1 25 1 80
 ///////////////////////////////////////////////////////////////////////////////
 
 void insertBSTNode(BSTNode **node, int value){

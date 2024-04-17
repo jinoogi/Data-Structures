@@ -102,8 +102,38 @@ int main()
 //////////////////////////////////////////////////////////////////////////////////
 
 void alternateMergeLinkedList(LinkedList *ll1, LinkedList *ll2)
-{
-    /* add your code here */
+{	int counter;
+	if(ll1==NULL || ll2==NULL){
+		printf("유효하지 않은 연결리스트입니다");
+		return ;
+	}
+
+    int size1=ll1->size;
+	int size2=ll2->size;
+
+	if(size1==0 || size2==0){
+		printf("비어있는 리스트가 있습니다");
+		return ;
+	}
+
+	if(size1 < size2){
+		counter=0;								//삽입위치 설정용으로 0 초기화하고
+		for (size1;size1>0;size1--){			//1번리스트 길이동안
+			int value=findNode(ll2,0)->item; 	//2번노드에서 값 가져오고
+			removeNode(ll2,0);					//가져온건 2번노드에서 빼버리고
+			insertNode(ll1,2*counter+1,value);	//1번노드에 가져온 값으로 노드만들고
+			counter++;							//카운터 1 증가
+		}		
+	}
+	else if(size1 >= size2){
+		counter=0;
+		for (size2;size2>0;size2--){
+			int value=findNode(ll2,0)->item; //2번노드에서 가져올 값
+			removeNode(ll2,0);
+			insertNode(ll1,2*counter+1,value);
+			counter++;
+		}		
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////////

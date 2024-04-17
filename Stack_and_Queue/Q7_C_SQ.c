@@ -103,8 +103,41 @@ int main()
 
 ////////////////////////////////////////////////////////////
 int balanced(char *expression)
-{
-/* add your code here */
+{	int i=0; //스택에 남은거 있는지 여부로 밸런스 판단하자는 로직
+	int isbalance=0; //여기선 0이 yes
+	Stack* s=malloc(sizeof(LinkedList));
+	s->ll.head=NULL;
+	s->ll.size=0;
+
+	for(i;i<256;i++){
+		if(expression[i]=='\0'){
+			break;
+		}
+		if(i>0){
+			if(expression[i]==']' && expression[i-1]=='['){
+				pop(s);
+			}
+			else if(expression[i]=='}' && expression[i-1]=='{'){
+				pop(s);
+			}
+			else if(expression[i]==')' && expression[i-1]=='('){
+				pop(s);
+			}
+			else{
+				push(s,1); //char을 넣어야하는데 int만 받는데... 어차피 판단만하면 되니깐 1넣자
+			}
+		}
+		else if (i==0){
+			push(s,1);
+		}
+	}
+	if (isEmptyStack(s)==1){
+		return 0;
+	}
+	else if (isEmptyStack(s)==0){
+		return 1;
+	}
+
 }
 
 ////////////////////////////////////////////////////////////

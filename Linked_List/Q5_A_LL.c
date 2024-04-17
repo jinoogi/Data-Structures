@@ -81,8 +81,8 @@ int main()
 			printList(&resultBackList);
 			printf("\n");
 			removeAllItems(&ll);
-			removeAllItems(&resultFrontList);
-			removeAllItems(&resultBackList);
+			// removeAllItems(&resultFrontList);
+			// removeAllItems(&resultBackList);
 			break;
 		case 0:
 			removeAllItems(&ll);
@@ -101,8 +101,22 @@ int main()
 //////////////////////////////////////////////////////////////////////////////////
 
 void frontBackSplitLinkedList(LinkedList *ll, LinkedList *resultFrontList, LinkedList *resultBackList)
-{
-	/* add your code here */
+{	
+	int size=ll->size;
+	int idx;
+	if(ll==NULL || size==0){
+		printf("유효하지 않은 배열입니다");
+		return;
+	}
+	if (size%2==0){
+		idx=size/2-1;
+	}
+	else if(size%2!=0){
+		idx=(int)size/2;
+	}
+	resultBackList->head = findNode(ll,idx)->next;
+	resultFrontList->head = findNode(ll,0);
+	findNode(ll,idx)->next=NULL;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////

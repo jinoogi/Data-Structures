@@ -87,8 +87,35 @@ int main()
 ////////////////////////////////////////////////////////////////////////
 
 int moveMaxToFront(ListNode **ptrHead)
-{
-    /* add your code here */
+{	if( *ptrHead == NULL || (*ptrHead)->item == NULL ){
+	return NULL;
+	}
+	ListNode * cur= * ptrHead;
+	ListNode * pre= NULL;
+
+	int max_idx=0;
+	int idx=0;
+	int max=0;
+	ListNode * max_cur, *max_pre;
+	while(cur){
+		if(max < cur->item){
+			max_pre=pre;
+			max=cur->item;
+			max_idx=idx;
+		}
+		pre=cur;
+		cur=cur->next;
+		idx++;
+	}
+	
+	if(max_pre != NULL){
+		max_cur=max_pre->next;
+		max_pre->next=max_pre->next->next; 	//만약에 ->next가 null이면 오류나나? : 안난다네
+		max_cur->next=(*ptrHead);
+		(*ptrHead)=max_cur;
+		// max_cur->next=NULL;
+	}
+
 }
 
 //////////////////////////////////////////////////////////////////////////////////

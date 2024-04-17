@@ -71,7 +71,7 @@ int main()
 		case 3:
 			printf("The resulting sorted linked list is: ");
 			printList(&ll);
-			removeAllItems(&ll);
+			// removeAllItems(&ll);
 			break;
 		case 0:
 			removeAllItems(&ll);
@@ -89,7 +89,28 @@ int main()
 //////////////////////////////////////////////////////////////////////////////////
 
 int insertSortedLL(LinkedList *ll, int item)
-{
+{	
+	int size=ll->size;
+	int* arr = NULL;
+	// arr=(int*)malloc((size+1)*sizeof(int));
+	
+	int count=0;
+	ListNode* current=ll->head;
+	for (int i=0;i<size;i++)
+	{	
+		if (current->item < item){
+			count=count+1;
+		}
+		if (current->item == item){
+			count=-1;
+			break;
+		}
+		current=current->next;
+	}
+
+	insertNode(ll,count,item);
+	return count;
+	// free(arr);
 	/* add your code here */
 }
 

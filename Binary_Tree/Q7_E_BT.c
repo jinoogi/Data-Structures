@@ -102,7 +102,23 @@ int main()
 
 int smallestValue(BTNode *node)
 {
-	/* add your code here */
+	if(node==NULL){
+        return 0;
+    }
+    // (smallestValue(node->left) && smallestValue(node->right))
+    int left_child=smallestValue(node->left);
+    int right_child=smallestValue(node->right);
+    if(left_child && right_child){ //자식 둘다 널 아닐때
+        int min_child=(left_child>=right_child?right_child:left_child);
+        return (node->item>=min_child?min_child:node->item);
+    }
+    else if(left_child || right_child){ //둘중 하나만 널일때
+        int min_child=(left_child==0?right_child:left_child);
+        return (node->item>=min_child?min_child:node->item);
+    }
+    else if(( left_child || right_child )==0){ //자식 둘다 널일때
+        return node->item;
+    }
 }
 
 //////////////////////////////////////////////////////////////////////////////////

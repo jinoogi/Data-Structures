@@ -90,9 +90,39 @@ int main()
 
 void inOrderTraversal(BSTNode *root)
 {
-	 /* add your code here */
-}
+	Stack* stk=malloc(sizeof(Stack));
+	stk->top=NULL;
+	BSTNode * next=root;
+	push(stk,root);
 
+	while(1){
+		if(isEmpty(stk)==1){
+			break;
+		}
+		if(stk->top->data->left != NULL){			// top의 left가 null이 아니면
+			push(stk,stk->top->data->left);			// top의 left 스택에 집어넣기
+			continue;
+		}
+		// else if(stk->top->data->right != NULL){		// top의 right가 null이 아니면
+		// 	push(stk,stk->top->data->right);		// top의 right 스택에 집어넣기
+		// 	continue;
+		// }
+		else if (stk->top->data->left == NULL){	// top의 left가 null이면, 스택에서 top 빼고 출력하기
+			BSTNode* poped= pop(stk);			
+			printf("\n%d\n",poped->item);
+
+			if(stk->top->data->right != NULL){
+				push(stk,stk->top->data->right);
+			}
+			stk->top->data = NULL;						// 실제 top노드도 null로 만들기
+			// if(temp !=NULL){	//  top의 right가 있으면, 스택에 넣기
+			// 	push(stk,temp);
+			// }
+		}
+	}
+	
+}
+// 1 20 1 15 1 50 1 10 1 18
 ///////////////////////////////////////////////////////////////////////////////
 
 void insertBSTNode(BSTNode **node, int value){

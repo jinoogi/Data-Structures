@@ -116,7 +116,16 @@ int main()
 
 void createQueueFromLinkedList(LinkedList *ll, Queue *q)
 {
-	/* add your code here */
+	if(isEmptyQueue(q)!=1){
+		removeAllItemsFromQueue(q);
+	}
+	int size=ll->size;
+	int idx=0;
+	for(size;size>0;size--){
+		int item = findNode(ll,idx)->item;
+		enqueue(q,item);
+		idx++;
+	}
 }
 
 void removeOddValues(Queue *q)

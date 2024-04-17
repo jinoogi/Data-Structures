@@ -85,8 +85,42 @@ int main()
 //////////////////////////////////////////////////////////////////////////////////
 
 void moveEvenItemsToBack(LinkedList *ll)
-{
-	/* add your code here */
+{	
+	if(ll==NULL || ll->size==0){
+		printf("유효하지 않은 연결리스트입니다");
+		return;
+	}
+
+	int counter=0;
+	int size=ll->size;
+	ListNode* end = findNode(ll,size-1);
+	ListNode* cur = findNode(ll,0);
+	ListNode* pre = NULL;
+
+	for(size;size>0;size--){
+		if(cur->item %2 == 0){
+			if(pre != NULL){
+				pre->next=cur->next;
+			}
+			// pre=cur;
+			end->next=cur;
+			end=end->next;
+			cur=cur->next;
+			end->next=NULL;
+			
+			
+			
+		}
+		else{
+			if (pre==NULL){
+				ll->head=cur;
+			}
+			pre=cur;
+			cur=cur->next;
+		}
+
+	}
+
 }
 
 ///////////////////////////////////////////////////////////////////////////////////

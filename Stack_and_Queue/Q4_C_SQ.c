@@ -112,7 +112,22 @@ int main()
 
 void reverse(Queue *q)
 {
-/* add your code here */
+	Stack* s=malloc(sizeof(q->ll));
+	s->ll.head=NULL;
+	s->ll.size=0;
+	s->ll.tail=NULL;
+	int size=q->ll.size;
+	int size2=size;
+	for(size;size>0;size--){
+		int item=dequeue(q);
+		// printf("%d",item);
+		push(s,item);
+	}
+	for(size2;size2>0;size2--){
+		int item2=pop(s);
+		// printf("%d",item2);
+		enqueue(q,item2);
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////

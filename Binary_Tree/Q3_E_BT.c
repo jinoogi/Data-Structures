@@ -99,9 +99,23 @@ int main()
 //////////////////////////////////////////////////////////////////////////////////
 
 int countOneChildNodes(BTNode *node)
+{   if(node==NULL){
+        return 0;
+    }
 
-{
-    /* add your code here */
+    int result_left=countOneChildNodes(node->left);
+    int result_right=countOneChildNodes(node->right);
+    
+    if(node->left==NULL && node->right==NULL){
+        return -1;
+    }
+    if((result_left==-1 || result_right==-1)&&(( node->left==NULL)+( node->right==NULL)==1)){ //좌,우중 하나만 1이고
+        return 1;
+    }
+    else if(result_left==-1 || result_right==-1){
+        return 0;
+    }
+    return result_left+result_right;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////

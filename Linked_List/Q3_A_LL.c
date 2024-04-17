@@ -86,7 +86,32 @@ int main()
 
 void moveOddItemsToBack(LinkedList *ll)
 {
-	/* add your code here */
+	ListNode * cur, *pre, *post;
+	int size=ll->size;
+	if( ll == NULL || size == 0){
+		printf("유효하지않은 리스트입니다");
+		return;
+	}
+
+	int count=0;
+	cur=ll->head;
+	for(size;size>0;size--){
+
+		int value=cur->item;
+
+		if( value % 2==0 ){						//만약 짝수면
+			cur=cur->next;
+			removeNode(ll,count);				//현위치에서 제거하고
+			insertNode(ll,0,value); 			//연결리스트 처음에 삽입
+			count++;
+		}
+		else if(value % 2 == 1){
+			cur=cur->next;
+			count++;							//카운트 1 증가 				
+		}
+
+	}
+
 }
 
 ///////////////////////////////////////////////////////////////////////////////////

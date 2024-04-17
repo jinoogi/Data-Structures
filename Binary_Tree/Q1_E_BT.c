@@ -112,11 +112,32 @@ int main()
 }
 
 //////////////////////////////////////////////////////////////////////////////////
-
+// 5 3 7 1 2 a a a a 4 8 a a a a
 int identical(BTNode *tree1, BTNode *tree2)
 
-{
-   /* add your code here */
+{   
+    Stack* stk1, *stk2, *stk1_copy, *stk2_copy;
+    stk1=malloc(sizeof(Stack)); stk2=malloc(sizeof(Stack));
+    stk1_copy=malloc(sizeof(Stack)); stk2_copy=malloc(sizeof(Stack));
+    stk1->top=NULL; stk2->top=NULL; stk1_copy->top=NULL; stk2_copy->top=NULL;
+    BTNode* temp;
+    push(stk1,tree1);
+    while ( temp=pop(stk1) != NULL)
+    {
+        push(stk1_copy,temp); //아카이브에 저장
+        push(stk1,temp->right);
+        push(stk1,temp->left);
+    }
+
+    push(stk2,tree2);
+    while ( temp=pop(stk2) != NULL)
+    {
+        push(stk2_copy,temp); //아카이브에 저장
+        push(stk2,temp->right);
+        push(stk2,temp->left);
+    }
+
+    return 0;
 }
 
 /////////////////////////////////////////////////////////////////////////////////
